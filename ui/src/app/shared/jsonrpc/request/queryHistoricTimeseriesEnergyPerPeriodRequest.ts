@@ -2,9 +2,6 @@ import { ChannelAddress } from "../../type/channeladdress";
 import { format } from 'date-fns';
 import { JsonrpcRequest } from "../base";
 import { JsonRpcUtils } from "../jsonrpcutils";
-import { DefaultTypes } from "../../service/defaulttypes";
-import { NumericValueAccessor } from "@ionic/angular";
-import { Resolution, Unit } from "src/app/edge/history/shared";
 
 /**
  * Represents a JSON-RPC Request to query Timeseries Energy data.
@@ -33,10 +30,10 @@ export class queryHistoricTimeseriesEnergyPerPeriodRequest extends JsonrpcReques
         private fromDate: Date,
         private toDate: Date,
         private channels: ChannelAddress[],
-        private resolution: Resolution
+        private resolution: number
     ) {
         super(queryHistoricTimeseriesEnergyPerPeriodRequest.METHOD, {
-            timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+            timezone: new Date().getTimezoneOffset() * 60,
             fromDate: format(fromDate, 'yyyy-MM-dd'),
             toDate: format(toDate, 'yyyy-MM-dd'),
             channels: JsonRpcUtils.channelsToStringArray(channels),

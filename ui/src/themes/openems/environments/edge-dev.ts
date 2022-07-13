@@ -3,7 +3,7 @@ import { Environment } from "src/environments";
 export const environment: Environment = {
     theme: "OpenEMS",
 
-    uiTitle: "OpenEMS UI",
+    uiTitle: "fortiss Energy Lab",
     edgeShortName: "OpenEMS",
     edgeLongName: "Open Energy Management System",
 

@@ -100,11 +100,6 @@ export class ProductionTotalChartComponent extends AbstractHistoryChart implemen
                     this.getChannelAddresses(edge, config).then(channelAddresses => {
                         channelAddresses.forEach(channelAddress => {
                             let component = config.getComponent(channelAddress.componentId);
-
-                            if (!result.data[channelAddress.toString()]) {
-                                return
-                            }
-
                             let data = result.data[channelAddress.toString()].map(value => {
                                 if (value == null) {
                                     return null
@@ -150,7 +145,7 @@ export class ProductionTotalChartComponent extends AbstractHistoryChart implemen
                                 }
                                 if (channelAddress.channelId == 'ActivePower') {
                                     datasets.push({
-                                        label: component.alias ?? channelAddress.channelId,
+                                        label: (channelAddress.componentId == component.alias ? channelAddress.componentId : component.alias),
                                         data: data
                                     });
                                     this.colors.push({
@@ -160,7 +155,7 @@ export class ProductionTotalChartComponent extends AbstractHistoryChart implemen
                                 }
                                 if (channelAddress.channelId == 'ActualPower') {
                                     datasets.push({
-                                        label: component.alias ?? channelAddress.channelId,
+                                        label: (channelAddress.componentId == component.alias ? channelAddress.componentId : component.alias),
                                         data: data
                                     });
                                     this.colors.push({

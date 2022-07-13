@@ -69,11 +69,9 @@ export class ConsumptionOtherChartComponent extends AbstractHistoryChart impleme
                 config.getComponentsImplementingNature("io.openems.edge.meter.api.SymmetricMeter")
                     .filter(component => component.isEnabled && config.isTypeConsumptionMetered(component))
                     .forEach(component => {
-                        if (result.data[component.id + "/ActivePower"]) {
-                            totalMeteredConsumption = result.data[component.id + '/ActivePower'].map((value, index) => {
-                                return Utils.addSafely(totalMeteredConsumption[index], value / 1000)
-                            })
-                        }
+                        totalMeteredConsumption = result.data[component.id + '/ActivePower'].map((value, index) => {
+                            return Utils.addSafely(totalMeteredConsumption[index], value / 1000)
+                        })
                     })
 
                 // gather other Consumption (Total - EVCS - consumptionMetered)
@@ -82,8 +80,8 @@ export class ConsumptionOtherChartComponent extends AbstractHistoryChart impleme
 
                     if (value != null) {
 
-                        // Check if either totalEvcsConsumption or totalMeteredConsumption is not null and the endValue not below 0
-                        return Utils.roundSlightlyNegativeValues(Utils.subtractSafely(Utils.subtractSafely(value / 1000, totalEvcsConsumption[index]), totalMeteredConsumption[index]));
+                        // Check if either totalEvcsConsumption or totalMeteredConsumption is not null
+                        return Utils.subtractSafely(Utils.subtractSafely(value / 1000, totalEvcsConsumption[index]), totalMeteredConsumption[index]);
                     }
                 })
 

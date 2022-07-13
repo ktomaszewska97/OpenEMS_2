@@ -5,29 +5,16 @@
     <!--
       Is FEMS online?
     -->
-    <ng-container *ngIf="!edge.isOnline">
-      <ion-row class="ion-justify-content-center">
-        <ion-col size="12" size-sm="8">
-          <ion-card>
-            <ion-item lines="full" color="danger">
-              <ion-icon slot="start" name="alert-circle-outline" color="primary"></ion-icon>
-              <ion-label>{{ edge.id }} ist nicht online!</ion-label>
-            </ion-item>
-
-            <!-- If Edge is Restarting after Update -->
-            <ion-card-content *ngIf="isEdgeRestarting">
-              <ion-row>
-                Das {{environment.edgeShortName}} wird neugestartet...
-              </ion-row>
-              <ion-row>
-                Dies kann bis zu 10 min dauern.
-              </ion-row>
-              <percentagebar [value]="100 - ((this.restartTime / ESTIMATED_REBOOT_TIME) * 100)"></percentagebar>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-      </ion-row>
-    </ng-container>
+    <ion-row *ngIf="!edge.isOnline" class="ion-justify-content-center">
+      <ion-col size="12" size-sm="8">
+        <ion-card>
+          <ion-item lines="full" color="danger">
+            <ion-icon slot="start" name="alert-circle-outline" color="primary"></ion-icon>
+            <ion-label>{{ edge.id }} ist nicht online!</ion-label>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+    </ion-row>
 
     <!--
       System Update State
@@ -35,7 +22,6 @@
     <ion-row *ngIf="edge.isOnline" class="ion-justify-content-center">
       <ion-col size="12" size-sm="8">
         <ion-card>
-          <ngx-spinner [name]="spinnerId"></ngx-spinner>
           <ion-item lines="full" color="light">
             <ion-icon slot="start" name="cloud-download-outline" color="primary"></ion-icon>
             <ion-label>
@@ -44,6 +30,7 @@
             </ion-label>
           </ion-item>
 
+          <ngx-spinner [name]="spinnerId"></ngx-spinner>
           <ion-card-content *ngIf="systemUpdateState">
             <ion-grid>
               <ng-container *ngIf="systemUpdateState.unknown as state">
@@ -52,6 +39,9 @@
                 -->
                 <ion-row>
                   <ion-col>Update Status ist unbekannt</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>{{ state | json }}</ion-col>
                 </ion-row>
               </ng-container>
               <ng-container *ngIf="systemUpdateState.updated as state">

@@ -1,0 +1,59 @@
+<ng-container *ngIf="component && service.currentEdge | async as edge">
+    <ng-container *ngIf="(edge.currentData | async)['channel'] as currentData">
+        <ion-card>
+            <ion-item lines="full" color="light">
+                <ion-label style="display: flex; justify-content: center;">Solar & Battery</ion-label>
+            </ion-item>
+            <ion-item>
+                <img src="assets/img/pv_instalation.png">
+            </ion-item>
+            <ion-card-content
+                style="display: flex; justify-content: center; flex-direction: column; align-items: center;">
+                <ion-list>
+                    <ion-item>
+                        <ion-label>Consumption: {{ currentData[component.id + '/ConsumptionW'] | unitvalue:'W'}}
+                        </ion-label>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>Production: {{ currentData[component.id + '/ProductionW'] | unitvalue:'W'}}
+                        </ion-label>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>
+                            Grid Feed In: {{ currentData[component.id + '/GridfeedinW'] | unitvalue:'W'}}
+                        </ion-label>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>Pac Total: {{ currentData[component.id + '/PacTotalW'] | unitvalue:'W'}}
+                        </ion-label>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>USOC: {{ currentData[component.id + '/Usoc'] | unitvalue:'%'}}
+                        </ion-label>
+                    </ion-item>
+                    
+                    <ion-item>
+                        <ion-label>Charge Status: {{ currentData[component.id + '/ChargeStatus']}}
+                        </ion-label>
+                    </ion-item>
+
+                    <ion-item>
+                        <ion-label>Switch Mode Manual/Automatic</ion-label>
+                        <ion-toggle (ionChange)="hitModeButton($event)"></ion-toggle>
+                    </ion-item>
+
+                    <ion-item>
+                        <ion-label>Charge/Discharge</ion-label>
+                        <ion-input type="text" id="chargeValue" name="chargeValue" [(ngModel)]="chargeValue"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-button type="button" (click)="charge()">Charge</ion-button>
+                        <ion-button type="button" (click)="discharge()">Discharge</ion-button>
+                    </ion-item>
+
+                </ion-list>
+
+            </ion-card-content>
+        </ion-card>
+    </ng-container>
+  </ng-container>

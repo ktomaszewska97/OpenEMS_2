@@ -67,7 +67,7 @@ export class ConsumptionMeterChartComponent extends AbstractHistoryChart impleme
                         return value / 1000; // convert to kW
                     }
                 });
-                if (address.channelId == "ActivePower" && address.componentId == this.componentId) {
+                if (address.channelId == "ActivePower") {
                     datasets.push({
                         label: this.translate.instant('General.consumption'),
                         data: activePowerData,

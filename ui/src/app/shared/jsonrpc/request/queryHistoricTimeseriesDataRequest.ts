@@ -2,8 +2,6 @@ import { ChannelAddress } from "../../../shared/type/channeladdress";
 import { format } from 'date-fns';
 import { JsonrpcRequest } from "../base";
 import { JsonRpcUtils } from "../jsonrpcutils";
-import { DefaultTypes } from "../../service/defaulttypes";
-import { Resolution, Unit } from "src/app/edge/history/shared";
 
 /**
  * Represents a JSON-RPC Request to query Historic Timeseries Data.
@@ -30,10 +28,10 @@ export class QueryHistoricTimeseriesDataRequest extends JsonrpcRequest {
         private fromDate: Date,
         private toDate: Date,
         private channels: ChannelAddress[],
-        private resolution: Resolution
+        private resolution: number
     ) {
         super(QueryHistoricTimeseriesDataRequest.METHOD, {
-            timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+            timezone: new Date().getTimezoneOffset() * 60,
             fromDate: format(fromDate, 'yyyy-MM-dd'),
             toDate: format(toDate, 'yyyy-MM-dd'),
             channels: JsonRpcUtils.channelsToStringArray(channels),

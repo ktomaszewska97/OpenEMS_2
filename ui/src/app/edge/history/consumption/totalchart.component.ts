@@ -61,6 +61,7 @@ export class ConsumptionTotalChartComponent extends AbstractHistoryChart impleme
                     }
                     this.labels = labels;
 
+
                     // gather EVCS consumption
                     let totalEvcsConsumption: number[] = [];
                     config.getComponentsImplementingNature("io.openems.edge.evcs.api.Evcs")
@@ -74,16 +75,14 @@ export class ConsumptionTotalChartComponent extends AbstractHistoryChart impleme
                             });
                         })
 
-                    // gather consumptionMetered consumption
+                    // gather consumptionMetered cosumption
                     let totalMeteredConsumption: number[] = [];
                     config.getComponentsImplementingNature("io.openems.edge.meter.api.SymmetricMeter")
                         .filter(component => component.isEnabled && config.isTypeConsumptionMetered(component))
                         .forEach(component => {
-                            if (result.data[component.id + "/ActivePower"]) {
-                                totalMeteredConsumption = result.data[component.id + '/ActivePower'].map((value, index) => {
-                                    return Utils.addSafely(totalMeteredConsumption[index], value / 1000)
-                                })
-                            }
+                            totalMeteredConsumption = result.data[component.id + '/ActivePower'].map((value, index) => {
+                                return Utils.addSafely(totalMeteredConsumption[index], value / 1000)
+                            })
                         })
 
                     // gather other Consumption (Total - EVCS - consumptionMetered)
@@ -92,8 +91,8 @@ export class ConsumptionTotalChartComponent extends AbstractHistoryChart impleme
 
                         if (value != null) {
 
-                            // Check if either totalEvcsConsumption or totalMeteredConsumption is not null and the endValue not below 0
-                            return Utils.roundSlightlyNegativeValues(Utils.subtractSafely(Utils.subtractSafely(value / 1000, totalEvcsConsumption[index]), totalMeteredConsumption[index]));
+                            // Check if either totalEvcsConsumption or totalMeteredConsumption is not null
+                            return Utils.subtractSafely(Utils.subtractSafely(value / 1000, totalEvcsConsumption[index]), totalMeteredConsumption[index]);
                         }
                     })
                     // convert datasets
@@ -112,9 +111,6 @@ export class ConsumptionTotalChartComponent extends AbstractHistoryChart impleme
 
                     this.getChannelAddresses(edge, config).then(channelAddresses => {
                         channelAddresses.forEach((channelAddress, index) => {
-                            if (!Object.keys(result.data).includes(channelAddress.toString())) {
-                                result.data[channelAddress.toString()] = [].fill(null);
-                            }
                             let component = config.getComponent(channelAddress.componentId);
                             let data = result.data[channelAddress.toString()].map(value => {
                                 if (value == null) {

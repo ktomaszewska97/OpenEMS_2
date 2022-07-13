@@ -1,3 +1,4 @@
+import { is } from 'date-fns/locale';
 import { ChannelAddress } from '../type/channeladdress';
 import { Widgets } from '../type/widget';
 import { Edge } from './edge';
@@ -261,8 +262,9 @@ export class EdgeConfig {
         }
         // Do we have a Meter with type PRODUCTION?
         for (let component of this.getComponentsImplementingNature("io.openems.edge.meter.api.SymmetricMeter")) {
-            if (component.isEnabled && this.isProducer(component)) {
-                return true;
+            if (component.isEnabled) {
+
+                return this.isProducer(component);
             }
         }
         return false;
@@ -287,7 +289,6 @@ export class EdgeConfig {
             case 'Kostal.Piko.Charger':
             case 'PV-Inverter.Fronius':
             case 'PV-Inverter.KACO.blueplanet':
-            case 'PV-Inverter.Kostal':
             case 'PV-Inverter.SMA.SunnyTripower':
             case 'PV-Inverter.Solarlog':
             case 'PV-Inverter.SunSpec':
