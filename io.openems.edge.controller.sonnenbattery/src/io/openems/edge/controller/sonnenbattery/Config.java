@@ -17,8 +17,14 @@ import org.osgi.service.metatype.annotations.ObjectClassDefinition;
 	@AttributeDefinition(name = "Is enabled?", description = "Is this Component enabled?")
 	boolean enabled() default true;
 	
+	@AttributeDefinition(name = "Is the CSV Logger enabled?", description = "On/off CSV Logger.")
+	boolean csvLoggerEnabled() default false;
+	
+	@AttributeDefinition(name = "Logger Counter", description = "How often do you want to log the data?")
+	int loggerCounter() default 60;
+	
 	@AttributeDefinition(name = "GET Status parameters", description = "The GET URL of the API")
-	String apiUrl() default "http://192.168.21.203:8080/api/v1/status";
+	String apiUrl() default "http://0.0.0.0:3000/api/v2/status";
 	
 	@AttributeDefinition(name = "GET Charge request", description = "The GET URL of the API")
 	String chargeRequestUrl() default "http://192.168.21.203:8080/api/v1/setpoint/charge/100";

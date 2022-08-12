@@ -1,0 +1,8 @@
+eclipse.preferences.version=1
+encoding//src/io/openems/edge/controller/LoadManagement/Config.java=UTF-8
+encoding//src/io/openems/edge/controller/LoadManagement/LoadManagement.java=UTF-8
+encoding//src/io/openems/edge/controller/LoadManagement/LoadManagementImpl.java=UTF-8
+encoding//test/io/openems/edge/controller/LoadManagement/MyConfig.java=UTF-8
+encoding//test/io/openems/edge/controller/LoadManagement/MyControllerTest.java=UTF-8
+encoding/bnd.bnd=UTF-8
+encoding/readme.adoc=UTF-8

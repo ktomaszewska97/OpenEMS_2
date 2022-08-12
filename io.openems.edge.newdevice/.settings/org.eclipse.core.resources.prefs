@@ -1,0 +1,8 @@
+eclipse.preferences.version=1
+encoding//src/io/openems/edge/newdevice/Config.java=UTF-8
+encoding//src/io/openems/edge/newdevice/NewDevice.java=UTF-8
+encoding//src/io/openems/edge/newdevice/NewDeviceImpl.java=UTF-8
+encoding//test/io/openems/edge/newdevice/MyConfig.java=UTF-8
+encoding//test/io/openems/edge/newdevice/MyModbusDeviceTest.java=UTF-8
+encoding/bnd.bnd=UTF-8
+encoding/readme.adoc=UTF-8

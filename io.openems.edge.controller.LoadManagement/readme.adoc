@@ -1,0 +1,3 @@
+= io.openems.edge.controller.LoadManagement
+
+https://github.com/OpenEMS/openems/tree/develop/io.openems.edge.controller.LoadManagement[Source Code icon:github[]]

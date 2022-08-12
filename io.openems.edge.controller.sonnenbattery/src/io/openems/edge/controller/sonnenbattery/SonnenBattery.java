@@ -99,7 +99,6 @@ public interface SonnenBattery extends Controller, OpenemsComponent {
 
 	public default void _setGridFeedInW(double value) {
 		this.getGridFeedInW().setNextValue(value);
-		System.out.println("Executed Set Grid Feed In W ");
 	}
 
 	public default DoubleWriteChannel getPacTotalW() {

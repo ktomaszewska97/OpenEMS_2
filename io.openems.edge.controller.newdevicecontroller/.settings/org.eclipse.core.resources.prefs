@@ -1,0 +1,8 @@
+eclipse.preferences.version=1
+encoding//src/io/openems/edge/controller/newdevicecontroller/Config.java=UTF-8
+encoding//src/io/openems/edge/controller/newdevicecontroller/NewDeviceController.java=UTF-8
+encoding//src/io/openems/edge/controller/newdevicecontroller/NewDeviceControllerImpl.java=UTF-8
+encoding//test/io/openems/edge/controller/newdevicecontroller/MyConfig.java=UTF-8
+encoding//test/io/openems/edge/controller/newdevicecontroller/MyControllerTest.java=UTF-8
+encoding/bnd.bnd=UTF-8
+encoding/readme.adoc=UTF-8

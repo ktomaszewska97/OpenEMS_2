@@ -1,0 +1,50 @@
+<ng-container *ngIf="component && service.currentEdge | async as edge">
+    <ng-container *ngIf="(edge.currentData | async)['channel'] as currentData">
+        <ion-card>
+            <ion-item lines="full" color="light">
+                <ion-label style="display: flex; justify-content: center;">Load Management</ion-label>
+            </ion-item>
+            <ion-card-content
+                style="display: flex; justify-content: center; flex-direction: column; align-items: center;">
+                <ion-list>
+                    <ion-item>
+                        <ion-label>Total: {{ currentData[component.id + '/Total'] }} kWh
+                        </ion-label>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>Power: {{ currentData[component.id + '/Power'] }} W
+                        </ion-label>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>Apparent Power: {{ currentData[component.id + '/ApparentPower'] }} W
+                        </ion-label>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>
+                            Reactive Power: {{ currentData[component.id + '/ReactivePower'] }} W
+                        </ion-label>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>Power Factor: {{ currentData[component.id + '/Factor']}}
+                        </ion-label>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>Voltage: {{ currentData[component.id + '/Voltage'] }} A
+                        </ion-label>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>Current: {{ currentData[component.id + '/Current'] }} A
+                        </ion-label>
+                    </ion-item>
+
+                    <ion-item>
+                        <ion-button type="button" (click)="buttonStatusOn()">ON</ion-button>
+                        <ion-button type="button" (click)="buttonStatusOff()">OFF</ion-button>
+                    </ion-item>
+
+                </ion-list>
+
+            </ion-card-content>
+        </ion-card>
+    </ng-container>
+  </ng-container>

@@ -21,7 +21,6 @@ export class SonnenBattery {
 
   private edge: Edge = null;
   public component: EdgeConfig.Component = null;
-  private previousModeState = 1;
   previousChargeState = 1;
   chargeValue: string = '';
 
@@ -72,94 +71,6 @@ export class SonnenBattery {
     }
   }
 
-  hitModeButton() {
-    if (this.edge) {
-      if (this.previousModeState == 2) {
-        this.edge
-          .sendRequest(
-            this.websocket,
-            new SetChannelValueRequest({
-              componentId: this.component.id,
-              channelId: 'ChannelValues',
-              value: {
-                modeStatus: 1,
-              },
-            })
-          )
-          .then((response) => {
-            this.service.toast('Mode status MANUAL', 'success');
-          })
-          .catch((reason) => {
-            this.service.toast('Error', 'danger');
-          });
-        this.previousModeState = 1;
-      } else {
-        this.edge
-          .sendRequest(
-            this.websocket,
-            new SetChannelValueRequest({
-              componentId: this.component.id,
-              channelId: 'ChannelValues',
-              value: {
-                modeStatus: 2,
-              },
-            })
-          )
-          .then((response) => {
-            this.service.toast('Mode status AUTOMATIC', 'warning');
-          })
-          .catch((reason) => {
-            this.service.toast('Error', 'danger');
-          });
-        this.previousModeState = 2;
-      }
-    }
-  }
-
-  hitChargeStatusButton() {
-    if (this.edge) {
-      if (this.previousChargeState == 2) {
-        this.edge
-          .sendRequest(
-            this.websocket,
-            new SetChannelValueRequest({
-              componentId: this.component.id,
-              channelId: 'ChannelValues',
-              value: {
-                chargeStatus: 1,
-              },
-            })
-          )
-          .then((response) => {
-            this.service.toast('Charge.', 'success');
-          })
-          .catch((reason) => {
-            this.service.toast('Error', 'danger');
-          });
-        this.previousChargeState = 1;
-      } else {
-        this.edge
-          .sendRequest(
-            this.websocket,
-            new SetChannelValueRequest({
-              componentId: this.component.id,
-              channelId: 'ChannelValues',
-              value: {
-                chargeStatus: 2,
-              },
-            })
-          )
-          .then((response) => {
-            this.service.toast('Discharge.', 'warning');
-          })
-          .catch((reason) => {
-            this.service.toast('Error', 'danger');
-          });
-        this.previousChargeState = 2;
-      }
-    }
-  }
-
   charge() {
     if (this.edge) {
       // Charge
@@ -207,6 +118,52 @@ export class SonnenBattery {
           this.service.toast('Error', 'danger');
         });
       this.previousChargeState = 1;
+    }
+  }
+
+  automatic() {
+    if (this.edge) {
+      this.edge;
+      this.edge
+        .sendRequest(
+          this.websocket,
+          new SetChannelValueRequest({
+            componentId: this.component.id,
+            channelId: 'ChannelValues',
+            value: {
+              modeStatus: 2,
+            },
+          })
+        )
+        .then((response) => {
+          this.service.toast('Mode status AUTOMATIC', 'success');
+        })
+        .catch((reason) => {
+          this.service.toast('Error', 'danger');
+        });
+    }
+  }
+
+  manual() {
+    if (this.edge) {
+      this.edge;
+      this.edge
+        .sendRequest(
+          this.websocket,
+          new SetChannelValueRequest({
+            componentId: this.component.id,
+            channelId: 'ChannelValues',
+            value: {
+              modeStatus: 1,
+            },
+          })
+        )
+        .then((response) => {
+          this.service.toast('Mode status MANUAL', 'success');
+        })
+        .catch((reason) => {
+          this.service.toast('Error', 'danger');
+        });
     }
   }
 }

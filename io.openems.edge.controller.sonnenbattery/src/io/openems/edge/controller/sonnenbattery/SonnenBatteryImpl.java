@@ -45,8 +45,9 @@ public class SonnenBatteryImpl extends AbstractOpenemsComponent implements Sonne
 	void activate(ComponentContext context, Config config) throws IOException {
 		super.activate(context, config.id(), config.alias(), config.enabled());
 		this.config = config;
+
 		this._setChargeStatus(0);
-		
+
 		/// Init. values
 		this._setConsumptionW(0);
 		this._setProductionW(0);
@@ -59,12 +60,13 @@ public class SonnenBatteryImpl extends AbstractOpenemsComponent implements Sonne
 		this._setUbat(0);
 		this._setTimestamp("");
 		this._setIsSystemInstalled(0);
-		
+
 	}
 
 	@Deactivate
 	protected void deactivate() {
 		super.deactivate();
+		// Turn off the Logger
 	}
 
 	@Override
@@ -139,13 +141,12 @@ public class SonnenBatteryImpl extends AbstractOpenemsComponent implements Sonne
 		} catch (Exception e) {
 			System.out.println("Cannot get charge status.");
 		}
-		
+
 		try {
 			this.getOperatingMode();
 		} catch (Exception e) {
 			System.out.println("Cannot get operating mode.");
 		}
-
 
 	}
 
@@ -184,7 +185,8 @@ public class SonnenBatteryImpl extends AbstractOpenemsComponent implements Sonne
 				this._setUbat(jo.get("Ubat").getAsDouble());
 				this._setTimestamp(jo.get("Timestamp").getAsString());
 				this._setIsSystemInstalled(jo.get("IsSystemInstalled").getAsDouble());
-
+				this._setModeStatus(jo.get("OperatingMode").getAsInt());
+				
 				System.out.println("PRINTING GRID FEED IN W (GET): " + jo.get("GridFeedIn_W").getAsDouble());
 				this._setGridFeedInW(jo.get("GridFeedIn_W").getAsDouble());
 				System.out.println("PRINTING GRID FEED IN W (SET): " + this.getGridFeedInW().value());

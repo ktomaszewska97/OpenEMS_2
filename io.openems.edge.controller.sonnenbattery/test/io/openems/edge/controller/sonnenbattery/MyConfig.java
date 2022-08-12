@@ -1,9 +1,9 @@
 package io.openems.edge.controller.sonnenbattery;
 
-import io.openems.edge.common.test.AbstractComponentConfig;
+import java.lang.annotation.Annotation;
 
 @SuppressWarnings("all")
-public class MyConfig extends AbstractComponentConfig implements Config {
+public class MyConfig implements Config {
 
 	protected static class Builder {
 		private String id;
@@ -23,7 +23,7 @@ public class MyConfig extends AbstractComponentConfig implements Config {
 //		}
 
 		public MyConfig build() {
-			return new MyConfig(this);
+			return new MyConfig();
 		}
 	}
 
@@ -34,13 +34,6 @@ public class MyConfig extends AbstractComponentConfig implements Config {
 	 */
 	public static Builder create() {
 		return new Builder();
-	}
-
-	private final Builder builder;
-
-	private MyConfig(Builder builder) {
-		super(Config.class, builder.id);
-		this.builder = builder;
 	}
 
 	@Override
@@ -75,6 +68,48 @@ public class MyConfig extends AbstractComponentConfig implements Config {
 
 	@Override
 	public String apiGetOperatingMode() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Class<? extends Annotation> annotationType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String id() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String alias() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean enabled() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean csvLoggerEnabled() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public int loggerCounter() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public String webconsole_configurationFactory_nameHint() {
 		// TODO Auto-generated method stub
 		return null;
 	}
